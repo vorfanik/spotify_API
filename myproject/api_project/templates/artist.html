@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Artist{% endblock %}
+
+{% block content %}
+<section class="artist_info">
+    <div class="artist_info_text">
+        <div class="genres_artist">
+            <h1>{{ artist.name }}</h1>
+            <p>{{ artist.genres.0 }}</p>
+            <p>{{ artist.genres.1 }}</p>
+            <p>{{ artist.genres.2 }}</p>
+            <p>{{ artist.genres.3 }}</p>
+            <p>{{ artist.genres.4 }}</p>
+        </div>
+        <div class="button_info_div">
+            <a class="button_info_a" target="_blank" href="https://en.wikipedia.org/wiki/{{artist.name}}">More info</a>
+            <a class="button_info_a" href="{% url 'related' artist.id %}">Fans also like</a>
+        </div>
+    </div>
+    {% if artist.images.0.url %}
+        <img src="{{ artist.images.0.url }}">
+    {% else %}
+        <img src="{% static 'img/no_image.jpg' %}">
+    {% endif %}
+</section>
+<br>
+<br>
+<h3>Albums</h3>
+<section class="all_albums">
+    {% for album in albums.items %}
+    <a class="info2" href="{% url 'album' album.id%}">
+        <div class="album">
+            <img class="album_cover" src="{{ album.images.0.url }}">
+            <h5>{{ album.name }}</h5>
+            <h6>{{ album.release_date }}</h6>
+        </div>
+    </a>
+    {% endfor %}
+</section>
+
+{% endblock %}

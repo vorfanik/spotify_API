@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<br>
+  <h6>{% trans "You have successfully logged out!" %}</h6>
+<br>
+  <div class="btn-group btn-group-sm">
+      <a href="{% url 'login' %}" class="btn btn-outline-warning me-2">{% trans "Log in again." %}</a>
+  </div>
+{% endblock %}

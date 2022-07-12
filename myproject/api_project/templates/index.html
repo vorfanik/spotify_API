@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<h3>Spotify API</h3>
+<section class="all_albums">
+    {% for album in albums %}
+    <a class="info2" href="{% url 'album' album.id%}">
+        <div class="album">
+            <img class="album_cover" src="{{ album.images.0.url }}">
+            <h5>{{album.artists.0.name}}</h5>
+            <h6>{{ album.name }}</h6>
+        </div>
+    </a>
+    {% endfor %}
+</section>
+{% endblock %}

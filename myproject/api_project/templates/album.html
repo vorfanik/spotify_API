@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% load django_template_maths %}
+{% load i18n %}
+
+{% block title %}Album{% endblock %}
+
+{% block content %}
+<div class="album_info_text">
+        <h3 style="margin-left: 0">{{ album.name }}</h3>
+     <a class="info2" href="{% url 'artist' album.artists.0.id%}">
+        <h5 style="padding: 0">{{ album.artists.0.name }}</h5>
+     </a>
+    <p>Label <i>{{ album.label }}</i></p>
+    <p>Release Date <i>{{ album.release_date }}</i></p>
+  </div>
+<section class="album_info">
+      <div>
+            {% for track in album.tracks.items %}
+            <div class="track_name_duration">
+                <p style="width: 600px;">{{ track.name }}</p>
+                <p>{{ track.duration_ms|div:60000|floatformat:2 }}</p>
+            </div>
+           {% endfor %}
+      </div>
+      <div class="album_cover_info">
+            <img src="{{ album.images.0.url }}">
+      </div>
+</section>
+{% endblock %}

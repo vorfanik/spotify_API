@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Related Artists{% endblock %}
+
+{% block content %}
+<h3>Fans also like...</h3>
+<section class="all_albums">
+    {% for artist in related %}
+    <a class="info2" href="{% url 'artist' artist.id%}">
+        <div class="album">
+            {% if artist.images.0.url %}
+            <img class="album_cover" src="{{ artist.images.0.url }}">
+            {% else %}
+            <img class="album_cover" src="{% static 'img/no_image.jpg' %}">
+            {% endif %}
+            <h5>{{ artist.name }}</h5>
+            <div class="genres_search">
+                <p>{{ artist.genres.0 }}</p>
+                <p>{{ artist.genres.1 }}</p>
+                <p>{{ artist.genres.2 }}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</section>
+
+{% endblock %}
+
