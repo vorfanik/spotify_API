@@ -1,17 +1,11 @@
-from django.shortcuts import render, get_object_or_404, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.core.paginator import Paginator
-from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-from django.views.generic.edit import FormMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
-from django.http import HttpResponse
-from .spotify_requests import authorize
+from .spotify_authorization import authorize
 from .models import Profile, Collection
 from .forms import ProfileUpdateForm, UserUpdateForm
 import string
@@ -57,8 +51,8 @@ def artist_info(request, artist_id):
     artist = api.artist(artist_id)
     artist_albums = api.artist_albums(artist_id, limit=50)
     collection = Collection.objects.filter(user=request.user.profile)
-    exist = ""
     for artists in collection.values("artist"):
+        exist = ""
         if artists['artist'] == artist_id:
             exist = artists['artist']
     context = {
