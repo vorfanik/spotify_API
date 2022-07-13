@@ -19,6 +19,24 @@
             <a class="button_info_a" target="_blank" href="https://en.wikipedia.org/wiki/{{artist.name}}">More info</a>
             <a class="button_info_a" href="{% url 'related' artist.id %}">Fans also like</a>
         </div>
+        {% if user.is_authenticated %}
+        <section id="button_add_del">
+            <form action="" method="post" id="add_form">
+                {% csrf_token %}
+                <div class="button_info_div">
+                    <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin-right: 10px;">Add</button>
+                </div>
+            </form>
+            {% if artist.id == exist %}
+            <form action="" method="post" id="del_form">
+                {% csrf_token %}
+                <div class="button_info_div">
+                    <button type="submit" name="btn" value="del_form" class="button_info_a delete" style="padding:0; margin-right: 10px;">Delete</button>
+                </div>
+            </form>
+            {% endif %}
+        </section>
+        {% endif %}
     </div>
     {% if artist.images.0.url %}
         <img src="{{ artist.images.0.url }}">

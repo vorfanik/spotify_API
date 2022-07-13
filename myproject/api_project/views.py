@@ -29,22 +29,59 @@ def index(request):
     }
     return render(request, 'index.html', context=context)
 
+
 def album_info(request, album_id):
     album = api.album(album_id)
-    return render(request, 'album.html', {'album': album})
+    collection = Collection.objects.filter(user=request.user.profile)
+    exist = ""
+    for albums in collection.values("album"):
+        if albums['album'] == album_id:
+            exist = albums['album']
+    context = {
+        'album': album,
+        'exist': exist,
+    }
+    if request.method == 'POST':
+        if request.POST.get("btn") == "add_form":
+            if Collection.objects.filter(album = album_id).exists():
+                return render(request, 'album.html', context=context)
+            else:
+                add = Collection.objects.create(artist ="Null", album=album_id, user=request.user.profile)
+        elif request.POST.get("btn") == "del_form":
+            Collection.objects.filter(album=album_id).delete()
+            return redirect('/api_project/collection/')
+    return render(request, 'album.html', context=context)
+
 
 def artist_info(request, artist_id):
     artist = api.artist(artist_id)
     artist_albums = api.artist_albums(artist_id, limit=50)
+    collection = Collection.objects.filter(user=request.user.profile)
+    exist = ""
+    for artists in collection.values("artist"):
+        if artists['artist'] == artist_id:
+            exist = artists['artist']
     context = {
         'artist': artist,
         'albums': artist_albums,
+        'exist': exist,
     }
+    if request.method == 'POST':
+        if request.POST.get("btn") == "add_form":
+            if Collection.objects.filter(artist = artist_id).exists():
+                return render(request, 'artist.html', context=context)
+            else:
+                add = Collection.objects.create(artist =artist_id, album="Null", user=request.user.profile)
+        elif request.POST.get("btn") == "del_form":
+            Collection.objects.filter(artist=artist_id).delete()
+            return redirect('/api_project/collection/')
     return render(request, 'artist.html', context=context)
+
 
 def related_artists(request, artist_id):
     related = api.artist_related_artists(artist_id)
     return render(request, 'related.html', {'related': related})
+
 
 def search(request):
     query = request.GET.get('query')
@@ -54,6 +91,27 @@ def search(request):
         'results':search_results,
     }
     return render(request, 'search.html', context=context)
+
+
+@login_required
+def collection(request):
+    collection = Collection.objects.filter(user=request.user.profile)
+    artists = []
+    albums = []
+    for artist in collection.values("artist"):
+        if artist['artist'] != "Null":
+            artists.append(api.artist(artist['artist']))
+        else: continue
+    for album in collection.values("album"):
+        if album['album'] != "Null":
+            albums.append(api.album(album['album']))
+        else: continue
+    context = {
+        'artists': artists,
+        'albums': albums,
+    }
+    return render(request, 'my_collection.html', context=context)
+
 
 @csrf_protect
 def register(request):
@@ -94,6 +152,7 @@ def register(request):
 @login_required
 def profile(request):
     return render(request, 'profile.html')
+
 
 @login_required
 def profile_update(request):

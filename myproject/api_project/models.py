@@ -4,14 +4,14 @@ from PIL import Image
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(default="default.jpg", upload_to="profile_photo")
 
     def __str__(self):
-        return f"{self.user.username} profile"
+        return f"{self.username} profile"
 
     class Meta:
-        verbose_name = 'User'
+        verbose_name = 'Users'
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(force_insert, force_update, using, update_fields)
@@ -22,9 +22,9 @@ class Profile(models.Model):
             img.save(self.photo.path)
 
 class Collection(models.Model):
-    artist = models.CharField('artist_id', max_length=100, default=None)
-    album = models.CharField('album_id', max_length=100, default=None)
-    user = models.ForeignKey(Profile, verbose_name='User', on_delete=models.SET_NULL, null=True, blank=True)
+    artist = models.CharField('artist_id', max_length=100, null=True)
+    album = models.CharField('album_id', max_length=100, null=True)
+    user = models.ForeignKey(Profile, verbose_name='User', on_delete=models.SET_NULL, null=True, blank=True, related_name='user')
 
     def __str__(self):
         return f"{self.user.username} - {self.artist} - {self.album}"

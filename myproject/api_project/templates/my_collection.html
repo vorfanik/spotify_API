@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load django_template_maths %}
+{% load i18n %}
+
+{% block title %}My Collection{% endblock %}
+
+{% block content %}
+
+<h3>Artists</h3>
+
+<section class="all_albums">
+    {% for artist in artists %}
+        <a class="info2" href="{% url 'artist' artist.id%}">
+            <div class="album">
+                {% if artist.images.0.url %}
+                <img class="album_cover" src="{{ artist.images.0.url }}">
+                {% else %}
+                <img class="album_cover" src="{% static 'img/no_image.jpg' %}">
+                {% endif %}
+                <h5>{{ artist.name }}</h5>
+                <div class="genres_search">
+                    <p>{{ artist.genres.0 }}</p>
+                    <p>{{ artist.genres.1 }}</p>
+                    <p>{{ artist.genres.2 }}</p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</section>
+<br>
+
+<h3>Albums</h3>
+
+<section class="all_albums">
+    {% for album in albums %}
+    <a class="info2" href="{% url 'album' album.id%}">
+        <div class="album">
+            <img class="album_cover" src="{{ album.images.0.url }}">
+            <h5>{{album.artists.0.name}}</h5>
+            <h6>{{ album.name }}</h6>
+        </div>
+    </a>
+    {% endfor %}
+</section>
+
+{% endblock %}

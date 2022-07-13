@@ -3,7 +3,7 @@ from .models import Profile, Collection
 
 
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('user',)
+    list_display = ('username',)
 
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('user', 'album', 'artist')
