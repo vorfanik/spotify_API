@@ -12,9 +12,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
 from django.http import HttpResponse
 from .spotify_requests import authorize
-from .models import Users, Collection
+from .models import Profile, Collection
+from .forms import ProfileUpdateForm, UserUpdateForm
 import string
 import random
+import re
 
 api = authorize()
 
@@ -52,3 +54,63 @@ def search(request):
         'results':search_results,
     }
     return render(request, 'search.html', context=context)
+
+@csrf_protect
+def register(request):
+    if request.method == "POST":
+        # pasiimame reikšmes iš registracijos formos
+        username = request.POST['username']
+        email = request.POST['email']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        # tikriname, ar sutampa slaptažodžiai
+        if password == password2:
+            reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{4,12}$"
+            match_re = re.compile(reg)
+            if re.search(match_re, password):
+                # tikriname, ar neužimtas username
+                if User.objects.filter(username=username).exists():
+                    messages.error(request, _('User name %s already exists!') % username)
+                    return redirect('register')
+                else:
+                    # tikriname, ar nėra tokio pat email
+                    if User.objects.filter(email=email).exists():
+                        messages.error(request, _('User with email Email %s is already registered!') % email)
+                        return redirect('register')
+                    else:
+                        # jeigu viskas tvarkoje, sukuriame naują vartotoją
+                        User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
+                        return redirect('login')
+            else:
+                messages.error(request, _('Please enter password should be One Capital Letter, One lowercase letter, One Number, Length Should be 4-12'))
+                return redirect('register')
+        else:
+            messages.error(request, _('Passwords do not match!'))
+            return redirect('register')
+    return render(request, 'registration/register.html')
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
+@login_required
+def profile_update(request):
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, _("Profile updated"))
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, 'profile_update.html', context)

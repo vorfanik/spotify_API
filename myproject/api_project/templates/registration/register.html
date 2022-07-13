@@ -18,7 +18,16 @@
         <div class="form-group">
             <label style="margin-bottom:5px" for="username">{% trans "User name" %}</label>
             <input name="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp">
-            <small id="usernameHelp" class="form-text text-muted">{% trans "Up to 20 characters." %}</small>
+        </div>
+        <br>
+          <div class="form-group">
+            <label style="margin-bottom:5px" for="first_name">{% trans "First name" %}</label>
+            <input name="first_name" type="text" class="form-control" id="first_name" aria-describedby="usernameHelp">
+        </div>
+        <br>
+          <div class="form-group">
+            <label style="margin-bottom:5px" for="last_name">{% trans "Last name" %}</label>
+            <input name="last_name" type="text" class="form-control" id="last_name" aria-describedby="usernameHelp">
         </div>
         <br>
         <div class="form-group">
@@ -30,7 +39,7 @@
         <div class="form-group">
             <label style="margin-bottom:5px" for="password">{% trans "Password" %}</label>
             <input name="password" type="password" class="form-control" id="password" aria-describedby="pwdHelp">
-            <small id="pwdHelp" class="form-text text-muted">{% trans "At least 8 characters. There can be no numbers alone." %} </small>
+            <small id="pwdHelp" class="form-text text-muted">{% trans 'Please enter password should be One Capital Letter, One lowercase letter, One Number, Length Should be 4-12' %} </small>
         </div>
         <br>
         <div class="form-group">

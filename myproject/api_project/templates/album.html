@@ -6,15 +6,20 @@
 {% block title %}Album{% endblock %}
 
 {% block content %}
-<div class="album_info_text">
-        <h3 style="margin-left: 0">{{ album.name }}</h3>
-     <a class="info2" href="{% url 'artist' album.artists.0.id%}">
-        <h5 style="padding: 0">{{ album.artists.0.name }}</h5>
-     </a>
-    <p>Label <i>{{ album.label }}</i></p>
-    <p>Release Date <i>{{ album.release_date }}</i></p>
-  </div>
-<section class="album_info">
+<section id="album_name_player">
+    <div class="album_info_text">
+            <h3 style="margin-left: 0">{{ album.name }}</h3>
+         <a class="info2" href="{% url 'artist' album.artists.0.id%}">
+            <h5 style="padding: 0">{{ album.artists.0.name }}</h5>
+         </a>
+        <p style="margin-bottom: 8px;">Label <i>{{ album.label }}</i></p>
+        <p style="margin-bottom: 20px;">Release Date <i>{{ album.release_date }}</i></p>
+    </div>
+    <div>
+        <iframe style="border-radius:12px; margin: 0 0 20px 25px;" src="https://open.spotify.com/embed/album/{{album.id}}?utm_source=generator" width="1150px" height="80px" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+</section>
+<section id="album_tracks">
       <div>
             {% for track in album.tracks.items %}
             <div class="track_name_duration">

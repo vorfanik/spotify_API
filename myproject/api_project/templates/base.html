@@ -43,7 +43,7 @@
 
         {% if user.is_authenticated %}
         <div class="col-md-3 text-end">
-            <a class="btn btn-outline-success me-2" href="#">
+            <a class="btn btn-outline-success me-2" href="{% url 'profile' %}">
                 <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"
                      xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -51,12 +51,12 @@
                           clip-rule="evenodd"/>
                 </svg>
                 {{ user.get_username }}</a>
-            <a class="btn btn-outline-warning me-2" href="#">{% trans "Log out" %}</a>
+            <a class="btn btn-outline-warning me-2" href="{% url 'logout'%}">{% trans "Log out" %}</a>
         </div>
         {% else %}
         <div class="col-md-3 text-end">
-            <a class="btn btn-outline-warning me-2" href="#" role="button">{% trans "Login" %}</a>
-            <a class="btn btn-secondary" href="#" role="button">{% trans "Sign-up" %}</a>
+            <a class="btn btn-outline-warning me-2" href="{% url 'login'%}" role="button">{% trans "Login" %}</a>
+            <a class="btn btn-secondary" href="{% url 'register' %}" role="button">{% trans "Sign-up" %}</a>
         </div>
         {% endif %}
 

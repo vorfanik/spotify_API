@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Users, Collection
+from .models import Profile, Collection
 
 
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('user', 'f_name', 'l_name', 'city')
+    list_display = ('user',)
 
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'music')
+    list_display = ('user', 'album', 'artist')
 
-admin.site.register(Users, UsersAdmin)
+admin.site.register(Profile, UsersAdmin)
 admin.site.register(Collection, CollectionAdmin)

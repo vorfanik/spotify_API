@@ -68,7 +68,6 @@ h6{
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-
 }
 
 .genres_search p {
@@ -76,7 +75,13 @@ h6{
     font-size:12px;
 }
 
-.album_info {
+#album_name_player {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+#album_tracks {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row-reverse;

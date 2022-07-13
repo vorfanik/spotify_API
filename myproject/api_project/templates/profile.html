@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Profile{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="media">
+        <img class="shadow-sm  mb-3 bg-body rounded" src="{{ user.profile.photo.url }}">
+        <div class="media-body">
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p class="text-secondary">{{ user.first_name }} {{ user.last_name }}</p>
+            <p class="text-secondary">{{ user.email }}</p>
+        </div>
+    </div>
+    <div class="btn-group btn-group">
+    <a href="{% url 'profile_update' %}" class="btn btn-outline-warning">{% trans "Update" %}</a>
+    </div>
+</div>
+{% endblock content %}
