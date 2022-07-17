@@ -18,12 +18,14 @@
         </div>
         {% if user.is_authenticated %}
         <section id="button_add_del">
+            {% if album.id != exist %}
             <form action="" method="post" id="add_form">
                 {% csrf_token %}
                 <div class="button_info_div">
                     <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin-right: 10px;">Add</button>
                 </div>
             </form>
+            {% endif %}
             {% if album.id == exist %}
             <form action="" method="post" id="del_form">
                 {% csrf_token %}
@@ -45,7 +47,11 @@
             {% for track in album.tracks.items %}
             <div class="track_name_duration">
                 <p style="width: 600px;">{{ track.name }}</p>
-                <p>{{ track.duration_ms|div:60000|floatformat:2 }}</p>
+                <p>{{ track.duration_ms|flr:60000 }}:</p>
+                {% if track.duration_ms|mod:60000|div:600|mul:0.6|add_decimal:0 < 10 %}
+                <p>0</p>
+                {% endif %}
+                <p>{{ track.duration_ms|mod:60000|div:600|mul:0.6|add_decimal:0 }}</p>
             </div>
            {% endfor %}
       </div>

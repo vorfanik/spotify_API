@@ -32,3 +32,9 @@ class Collection(models.Model):
     class Meta:
         verbose_name = 'Collection'
         verbose_name_plural = 'Collections'
+
+class Recommendation(models.Model):
+    genres = models.CharField('genres', max_length=50)
+
+    def __str__(self):
+        return f"{self.genres}"

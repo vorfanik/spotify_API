@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Artist{% endblock %}
+
+{% block content %}
+
+
+<form action="" method="post" id="recommendation">
+    {% csrf_token %}
+        <select name="genre" class="recom_select">
+            {% for genre in genres_all %}
+                <option value="{{genre}}">{{ genre }}</option>
+            {% endfor %}
+        </select>
+        <div class="button_info_div">
+            <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin: 0 10px;">Search</button>
+        </div>
+</form>
+<br>
+
+{% if artists %}
+<h3>Results for "{{genre}}"</h3>
+<div class="tab">
+  <button class="tablinks active" onclick="openElement(event, 'Artists')" id="defaultOpen">Artists</button>
+  <button class="tablinks" onclick="openElement(event, 'Albums')">Albums</button>
+</div>
+
+<div id="Artists" class="tabcontent">
+    <section class="all_albums">
+        {% for artist in artists %}
+            <a class="info2" href="{% url 'artist' artist.id%}">
+                <div class="album">
+                    {% if artist.images.0.url %}
+                    <img class="album_cover" src="{{ artist.images.0.url }}">
+                    {% else %}
+                    <img class="album_cover" src="{% static 'img/no_image.jpg' %}">
+                    {% endif %}
+                    <h5>{{ artist.name }}</h5>
+                    <div class="genres_search">
+                        <p>{{ artist.genres.0 }}</p>
+                        <p>{{ artist.genres.1 }}</p>
+                        <p>{{ artist.genres.2 }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </section>
+</div>
+{% endif %}
+
+{% if albums %}
+<div id="Albums" class="tabcontent">
+    <section class="all_albums">
+        {% for album in albums %}
+            <a class="info2" href="{% url 'album' album.id%}">
+                <div class="album">
+                    <img class="album_cover" src="{{ album.images.0.url }}">
+                    <h5>{{album.artists.0.name}}</h5>
+                    <h6>{{ album.name }}</h6>
+                </div>
+            </a>
+        {% endfor %}
+    </section>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -21,12 +21,14 @@
         </div>
         {% if user.is_authenticated %}
         <section id="button_add_del">
+            {% if artist.id != exist %}
             <form action="" method="post" id="add_form">
                 {% csrf_token %}
                 <div class="button_info_div">
                     <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin-right: 10px;">Add</button>
                 </div>
             </form>
+            {% endif %}
             {% if artist.id == exist %}
             <form action="" method="post" id="del_form">
                 {% csrf_token %}

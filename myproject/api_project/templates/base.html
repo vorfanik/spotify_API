@@ -25,17 +25,16 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{% url 'index' %}" class="nav-link px-2 link-secondary">{% trans "Home" %}</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">{% trans "About" %}</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'collection' %}" class="nav-link px-2 link-dark">{% trans "My Collection" %}</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">{% trans "Music Recommendation" %}</a></li>
+            <li><a href="{% url 'recommendation' %}" class="nav-link px-2 link-dark">{% trans "Music Recommendation" %}</a></li>
             {% endif %}
         </ul>
 
 
         <div>
             <form action="{% url 'search' %}" autocomplete="off" method="get" class="form-inline my-2 my-md-0" style="margin-left: 0px">
-                <input name="query" class="form-control" type="text" placeholder="Search by artist">
+                <input name="query" class="form-control" type="text" placeholder="Search by artist or album">
             </form>
         </div>
 
@@ -66,6 +65,7 @@
     <main class="main">
         {% block content %}{% endblock %}
     </main>
+    <script type="text/javascript" src="{% static 'script/script.js' %}"></script>
 </body>
 
 <div class="container">

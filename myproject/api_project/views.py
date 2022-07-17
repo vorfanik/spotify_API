@@ -6,11 +6,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
 from .spotify_authorization import authorize
-from .models import Profile, Collection
+from .models import Collection, Recommendation
 from .forms import ProfileUpdateForm, UserUpdateForm
 import string
 import random
 import re
+from collections import Counter
 
 api = authorize()
 
@@ -26,11 +27,11 @@ def index(request):
 
 def album_info(request, album_id):
     album = api.album(album_id)
-    collection = Collection.objects.filter(user=request.user.profile)
-    exist = ""
-    for albums in collection.values("album"):
-        if albums['album'] == album_id:
-            exist = albums['album']
+    exist = ''
+    if request.user.is_authenticated:
+        collection = Collection.objects.filter(user=request.user.profile)
+        if collection.filter(album=album_id):
+            exist = album_id
     context = {
         'album': album,
         'exist': exist,
@@ -50,11 +51,11 @@ def album_info(request, album_id):
 def artist_info(request, artist_id):
     artist = api.artist(artist_id)
     artist_albums = api.artist_albums(artist_id, limit=50)
-    collection = Collection.objects.filter(user=request.user.profile)
-    for artists in collection.values("artist"):
-        exist = ""
-        if artists['artist'] == artist_id:
-            exist = artists['artist']
+    exist = ''
+    if request.user.is_authenticated:
+        collection = Collection.objects.filter(user=request.user.profile)
+        if collection.filter(artist=artist_id):
+            exist = artist_id
     context = {
         'artist': artist,
         'albums': artist_albums,
@@ -79,10 +80,12 @@ def related_artists(request, artist_id):
 
 def search(request):
     query = request.GET.get('query')
-    search_results = api.search(query, types=('artist',), limit=12, offset=0)
+    search_results_artists = api.search(query, types=('artist',), limit=12, offset=0)
+    search_results_albums = api.search(query, types=('album',), limit=12, offset=0)
     context = {
         'query': query,
-        'results':search_results,
+        'results_artists':search_results_artists,
+        'results_albums':search_results_albums,
     }
     return render(request, 'search.html', context=context)
 
@@ -105,6 +108,40 @@ def collection(request):
         'albums': albums,
     }
     return render(request, 'my_collection.html', context=context)
+
+
+@csrf_protect
+def recommendation(request):
+    genres_all = Recommendation.objects.all()
+    genre = ''
+    artists = []
+    artists_id = []
+    album_id = []
+    albums = []
+    if request.method == "POST":
+        genre = request.POST['genre']
+        tracks = api.recommendations(genres=[genre], limit=12)
+        # Artists
+        for track in tracks.tracks:
+            for artist in track.artists:
+                artists_id.append(artist.id)
+                uniq_artist_id = list(set(artists_id))
+        for recomm in uniq_artist_id:
+            artists.append(api.artist(recomm))
+        # Albums
+        for album in tracks.tracks:
+            album_id.append(album.album.id)
+            uniq_album_id = list(set(album_id))
+        for recomm in uniq_album_id:
+            albums.append(api.album(recomm))
+    context = {
+        'genres_all': genres_all,
+        'genre': genre,
+        'artists':artists,
+        'albums':albums,
+    }
+    return render(request, 'recommendation.html', context=context)
+
 
 
 @csrf_protect

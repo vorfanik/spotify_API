@@ -7,41 +7,54 @@
 
 {% block content %}
 
-<h3>Artists</h3>
+<div class="tab">
+  <button class="tablinks" onclick="openElement(event, 'Artists')" id="defaultOpen">Artists</button>
+  <button class="tablinks" onclick="openElement(event, 'Albums')">Albums</button>
+</div>
 
-<section class="all_albums">
-    {% for artist in artists %}
-        <a class="info2" href="{% url 'artist' artist.id%}">
-            <div class="album">
-                {% if artist.images.0.url %}
-                <img class="album_cover" src="{{ artist.images.0.url }}">
-                {% else %}
-                <img class="album_cover" src="{% static 'img/no_image.jpg' %}">
-                {% endif %}
-                <h5>{{ artist.name }}</h5>
-                <div class="genres_search">
-                    <p>{{ artist.genres.0 }}</p>
-                    <p>{{ artist.genres.1 }}</p>
-                    <p>{{ artist.genres.2 }}</p>
-                </div>
-            </div>
-        </a>
-    {% endfor %}
-</section>
-<br>
 
-<h3>Albums</h3>
+<div id="Artists" class="tabcontent">
+    {% if artists %}
+        <section class="all_albums">
+            {% for artist in artists %}
+                <a class="info2" href="{% url 'artist' artist.id%}">
+                    <div class="album">
+                        {% if artist.images.0.url %}
+                        <img class="album_cover" src="{{ artist.images.0.url }}">
+                        {% else %}
+                        <img class="album_cover" src="{% static 'img/no_image.jpg' %}">
+                        {% endif %}
+                        <h5>{{ artist.name }}</h5>
+                        <div class="genres_search">
+                            <p>{{ artist.genres.0 }}</p>
+                            <p>{{ artist.genres.1 }}</p>
+                            <p>{{ artist.genres.2 }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </section>
+    {% else %}
+        <h4 style="margin: 20px 0 0 55px">You don't have any artists in your collection</h4>
+    {% endif %}
+</div>
 
-<section class="all_albums">
-    {% for album in albums %}
-    <a class="info2" href="{% url 'album' album.id%}">
-        <div class="album">
-            <img class="album_cover" src="{{ album.images.0.url }}">
-            <h5>{{album.artists.0.name}}</h5>
-            <h6>{{ album.name }}</h6>
-        </div>
-    </a>
-    {% endfor %}
-</section>
+<div id="Albums" class="tabcontent">
+    {% if albums %}
+        <section class="all_albums">
+            {% for album in albums %}
+                <a class="info2" href="{% url 'album' album.id%}">
+                    <div class="album">
+                        <img class="album_cover" src="{{ album.images.0.url }}">
+                        <h5>{{album.artists.0.name}}</h5>
+                        <h6>{{ album.name }}</h6>
+                    </div>
+                </a>
+            {% endfor %}
+        </section>
+    {% else %}
+        <h4 style="margin: 20px 0 0 55px">You don't have any albums in your collection</h4>
+    {% endif %}
+</div>
 
 {% endblock %}
