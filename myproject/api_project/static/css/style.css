@@ -172,7 +172,7 @@ h6{
 .delete{
     width: 80px;
     height: 30px;
-    margin-left:10px;
+    margin-left:19px;
     background: #888888;
 }
 
@@ -234,4 +234,10 @@ h6{
 @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+#track_link {
+    border: none;
+    text-align: left;
+    background: none;
 }

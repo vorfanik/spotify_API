@@ -27,11 +27,14 @@ def index(request):
 
 def album_info(request, album_id):
     album = api.album(album_id)
-    exist = ''
+    exist, id = '', ''
     if request.user.is_authenticated:
         collection = Collection.objects.filter(user=request.user.profile)
         if collection.filter(album=album_id):
             exist = album_id
+    if request.method == 'POST':
+        if request.POST.get("btn") == "track.id":
+            id = 'track'
     context = {
         'album': album,
         'exist': exist,
@@ -42,9 +45,15 @@ def album_info(request, album_id):
                 return render(request, 'album.html', context=context)
             else:
                 add = Collection.objects.create(artist ="Null", album=album_id, user=request.user.profile)
+                return redirect(f'/api_project/album/{album_id}')
         elif request.POST.get("btn") == "del_form":
             Collection.objects.filter(album=album_id).delete()
             return redirect('/api_project/collection/')
+        elif request.POST.get("btn") == "track":
+            id = request.POST['track_link']
+        elif request.POST.get("btn") == "listen_album":
+            return redirect(f'/api_project/album/{album_id}')
+    context["id"] = id
     return render(request, 'album.html', context=context)
 
 
@@ -67,6 +76,7 @@ def artist_info(request, artist_id):
                 return render(request, 'artist.html', context=context)
             else:
                 add = Collection.objects.create(artist =artist_id, album="Null", user=request.user.profile)
+                return redirect(f'/api_project/artist/{artist_id}')
         elif request.POST.get("btn") == "del_form":
             Collection.objects.filter(artist=artist_id).delete()
             return redirect('/api_project/collection/')
@@ -93,8 +103,7 @@ def search(request):
 @login_required
 def collection(request):
     collection = Collection.objects.filter(user=request.user.profile)
-    artists = []
-    albums = []
+    artists, albums = [], []
     for artist in collection.values("artist"):
         if artist['artist'] != "Null":
             artists.append(api.artist(artist['artist']))
@@ -203,4 +212,4 @@ def profile_update(request):
         'u_form': u_form,
         'p_form': p_form,
     }
-    return render(request, 'profile_update.html', context)
+    return render(request, 'profile_update.html', context=context)

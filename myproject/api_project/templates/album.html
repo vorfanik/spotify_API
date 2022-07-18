@@ -6,6 +6,7 @@
 {% block title %}Album{% endblock %}
 
 {% block content %}
+
 <section id="album_name_player">
     <div class="album_info_add_btn">
         <div class="album_info_text">
@@ -16,47 +17,72 @@
             <p style="margin-bottom: 8px;">Label <i>{{ album.label }}</i></p>
             <p style="margin-bottom: 20px;">Release Date <i>{{ album.release_date }}</i></p>
         </div>
+
         {% if user.is_authenticated %}
-        <section id="button_add_del">
-            {% if album.id != exist %}
-            <form action="" method="post" id="add_form">
-                {% csrf_token %}
-                <div class="button_info_div">
-                    <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin-right: 10px;">Add</button>
-                </div>
-            </form>
-            {% endif %}
-            {% if album.id == exist %}
-            <form action="" method="post" id="del_form">
-                {% csrf_token %}
-                <div class="button_info_div">
-                    <button type="submit" name="btn" value="del_form" class="button_info_a delete" style="padding:0; margin-right: 10px;">Delete</button>
-                </div>
-            </form>
-            {% endif %}
-        </section>
+            <section id="button_add_del">
+
+                {% if id %}
+                    <form action="" method="post" id="listen_album">
+                        {% csrf_token %}
+                        <div class="button_info_div">
+                             <button type="submit" name="btn" value="listen_album" class="button_info_a" style="padding:0; margin-right: 10px; width: 150px;">Listen to full album</button>
+                        </div>
+                    </form>
+                {% endif%}
+
+                {% if album.id != exist %}
+                <form action="" method="post" id="add_form">
+                    {% csrf_token %}
+                    <div class="button_info_div">
+                        <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin-right: 10px;">Add</button>
+                    </div>
+                </form>
+                {% endif %}
+
+                {% if album.id == exist %}
+                <form action="" method="post" id="del_form">
+                    {% csrf_token %}
+                    <div class="button_info_div">
+                        <button type="submit" name="btn" value="del_form" class="button_info_a delete" style="padding:0; margin-right: 10px;">Delete</button>
+                    </div>
+                </form>
+                {% endif %}
+            </section>
         {% endif %}
     </div>
-    <div>
-        <iframe style="border-radius:12px; margin: 0 0 20px 25px;" src="https://open.spotify.com/embed/album/{{album.id}}?utm_source=generator" width="1150px" height="80px" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-    </div>
+
+    {% if user.is_authenticated %}
+        {% if id %}
+            <iframe style="border-radius:12px; margin: 0 0 20px 25px;" src="https://open.spotify.com/embed/track/{{id}}?utm_source=generator" width="1150px" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        {% else %}
+            <iframe style="border-radius:12px; margin: 0 0 20px 25px;" src="https://open.spotify.com/embed/album/{{album.id}}?utm_source=generator" width="1150px" height="80px" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        {% endif%}
+    {% endif %}
 
 </section>
+
 <section id="album_tracks">
       <div>
             {% for track in album.tracks.items %}
-            <div class="track_name_duration">
-                <p style="width: 600px;">{{ track.name }}</p>
-                <p>{{ track.duration_ms|flr:60000 }}:</p>
-                {% if track.duration_ms|mod:60000|div:600|mul:0.6|add_decimal:0 < 10 %}
-                <p>0</p>
-                {% endif %}
-                <p>{{ track.duration_ms|mod:60000|div:600|mul:0.6|add_decimal:0 }}</p>
-            </div>
-           {% endfor %}
+                  <form action="" method="post" id="track">
+                        {% csrf_token %}
+                        <button id="track_link" type="submit" name="btn" value="track">
+                            <input type="hidden" name="track_link" value="{{track.id}}">
+                            <div class="track_name_duration">
+                                <p style="width: 600px;">{{ track.name }}</p>
+                                <p>{{ track.duration_ms|flr:60000 }}:</p>
+                                {% if track.duration_ms|mod:60000|div:600|mul:0.6|add_decimal:0 < 10 %}
+                                <p>0</p>
+                                {% endif %}
+                                <p>{{ track.duration_ms|mod:60000|div:600|mul:0.6|add_decimal:0 }}</p>
+                            </div>
+                        </button>
+                    </form>
+            {% endfor %}
       </div>
       <div class="album_cover_info">
             <img src="{{ album.images.0.url }}">
       </div>
 </section>
+
 {% endblock %}
