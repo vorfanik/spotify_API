@@ -11,9 +11,12 @@ from .forms import ProfileUpdateForm, UserUpdateForm
 import string
 import random
 import re
-from collections import Counter
+from django.contrib.auth import logout
+from django.utils.translation import gettext as _
+
 
 api = authorize()
+
 
 def index(request):
     random_album_name = ''.join(random.choices(string.ascii_letters, k=1))
@@ -21,6 +24,7 @@ def index(request):
     albums = random_albums[0].items
     context = {
         'albums': albums,
+        'random_album_name': random_album_name,
     }
     return render(request, 'index.html', context=context)
 
@@ -41,10 +45,10 @@ def album_info(request, album_id):
     }
     if request.method == 'POST':
         if request.POST.get("btn") == "add_form":
-            if Collection.objects.filter(album = album_id).exists():
+            if Collection.objects.filter(album=album_id).exists():
                 return render(request, 'album.html', context=context)
             else:
-                add = Collection.objects.create(artist ="Null", album=album_id, user=request.user.profile)
+                Collection.objects.create(artist="Null", album=album_id, user=request.user.profile)
                 return redirect(f'/api_project/album/{album_id}')
         elif request.POST.get("btn") == "del_form":
             Collection.objects.filter(album=album_id).delete()
@@ -72,10 +76,7 @@ def artist_info(request, artist_id):
     }
     if request.method == 'POST':
         if request.POST.get("btn") == "add_form":
-            if Collection.objects.filter(artist = artist_id).exists():
-                return render(request, 'artist.html', context=context)
-            else:
-                add = Collection.objects.create(artist =artist_id, album="Null", user=request.user.profile)
+                Collection.objects.create(artist=artist_id, album="Null", user=request.user.profile)
                 return redirect(f'/api_project/artist/{artist_id}')
         elif request.POST.get("btn") == "del_form":
             Collection.objects.filter(artist=artist_id).delete()
@@ -94,8 +95,8 @@ def search(request):
     search_results_albums = api.search(query, types=('album',), limit=12, offset=0)
     context = {
         'query': query,
-        'results_artists':search_results_artists,
-        'results_albums':search_results_albums,
+        'results_artists': search_results_artists,
+        'results_albums': search_results_albums,
     }
     return render(request, 'search.html', context=context)
 
@@ -107,11 +108,13 @@ def collection(request):
     for artist in collection.values("artist"):
         if artist['artist'] != "Null":
             artists.append(api.artist(artist['artist']))
-        else: continue
+        else:
+            continue
     for album in collection.values("album"):
         if album['album'] != "Null":
             albums.append(api.album(album['album']))
-        else: continue
+        else:
+            continue
     context = {
         'artists': artists,
         'albums': albums,
@@ -146,11 +149,10 @@ def recommendation(request):
     context = {
         'genres_all': genres_all,
         'genre': genre,
-        'artists':artists,
-        'albums':albums,
+        'artists': artists,
+        'albums': albums,
     }
     return render(request, 'recommendation.html', context=context)
-
 
 
 @csrf_protect
@@ -182,12 +184,14 @@ def register(request):
                         User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
                         return redirect('login')
             else:
-                messages.error(request, _('Please enter password should be One Capital Letter, One lowercase letter, One Number, Length Should be 4-12'))
+                messages.error(request, _('Please enter password should be One Capital Letter, One lowercase letter, '
+                                          'One Number, Length Should be 4-12'))
                 return redirect('register')
         else:
             messages.error(request, _('Passwords do not match!'))
             return redirect('register')
     return render(request, 'registration/register.html')
+
 
 @login_required
 def profile(request):
@@ -207,9 +211,12 @@ def profile_update(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-
     context = {
         'u_form': u_form,
         'p_form': p_form,
     }
     return render(request, 'profile_update.html', context=context)
+
+def log_out(request):
+    logout(request)
+    return redirect('/api_project/')

@@ -2,10 +2,10 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Related Artists{% endblock %}
+{% block title %}{% trans "Related Artists" %}{% endblock %}
 
 {% block content %}
-<h3>Fans also like...</h3>
+<h3>{% trans "Fans also like..." %}</h3>
 <section class="all_albums">
     {% for artist in related %}
     <a class="info2" href="{% url 'artist' artist.id%}">

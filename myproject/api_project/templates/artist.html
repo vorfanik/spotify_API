@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Artist{% endblock %}
+{% block title %}{% trans "Artist" %}{% endblock %}
 
 {% block content %}
 <section class="artist_info">
@@ -16,8 +16,8 @@
             <p>{{ artist.genres.4 }}</p>
         </div>
         <div class="button_info_div">
-            <a class="button_info_a" target="_blank" href="https://en.wikipedia.org/wiki/{{artist.name}}">More info</a>
-            <a class="button_info_a" href="{% url 'related' artist.id %}">Fans also like</a>
+            <a class="button_info_a" target="_blank" href="https://en.wikipedia.org/wiki/{{artist.name}}">{% trans "More info" %}</a>
+            <a class="button_info_a" href="{% url 'related' artist.id %}">{% trans "Fans also like" %}</a>
         </div>
         {% if user.is_authenticated %}
         <section id="button_add_del">
@@ -25,15 +25,14 @@
             <form action="" method="post" id="add_form">
                 {% csrf_token %}
                 <div class="button_info_div">
-                    <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin-right: 10px;">Add</button>
+                    <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin-right: 10px;">{% trans "Add" %}</button>
                 </div>
             </form>
-            {% endif %}
-            {% if artist.id == exist %}
+            {% else %}
             <form action="" method="post" id="del_form">
                 {% csrf_token %}
                 <div class="button_info_div">
-                    <button type="submit" name="btn" value="del_form" class="button_info_a delete" style="padding:0; margin-right: 10px;">Delete</button>
+                    <button type="submit" name="btn" value="del_form" class="button_info_a delete" style="padding:0; margin-right: 10px;">{% trans "Delete" %}</button>
                 </div>
             </form>
             {% endif %}
@@ -48,7 +47,7 @@
 </section>
 <br>
 <br>
-<h3>Albums</h3>
+<h3>{% trans "Albums" %}</h3>
 <section class="all_albums">
     {% for album in albums.items %}
     <a class="info2" href="{% url 'album' album.id%}">

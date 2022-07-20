@@ -7,7 +7,7 @@ from .models import Profile
 @receiver(post_save, sender=User) # jeigu išsaugojamas User objektas, inicijuojama f-ja po dekoratoriumi
 def create_profile(sender, instance, created, **kwargs): # instance yra ką tik sukurtas User objektas.
     if created:
-        Profile.objects.create(user=instance)
+        Profile.objects.create(username=instance)
         print('KWARGS: ', kwargs)
 
 

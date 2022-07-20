@@ -3,13 +3,13 @@
 {% load django_template_maths %}
 {% load i18n %}
 
-{% block title %}My Collection{% endblock %}
+{% block title %}{% trans "My Collection" %}{% endblock %}
 
 {% block content %}
 
 <div class="tab">
-  <button class="tablinks" onclick="openElement(event, 'Artists')" id="defaultOpen">Artists</button>
-  <button class="tablinks" onclick="openElement(event, 'Albums')">Albums</button>
+  <button class="tablinks" onclick="openElement(event, 'Artists')" id="defaultOpen">{% trans "Artists" %}</button>
+  <button class="tablinks" onclick="openElement(event, 'Albums')">{% trans "Albums" %}</button>
 </div>
 
 
@@ -35,7 +35,7 @@
             {% endfor %}
         </section>
     {% else %}
-        <h4 style="margin: 20px 0 0 55px">You don't have any artists in your collection</h4>
+        <h4 style="margin: 20px 0 0 55px">{% trans "You don't have any artists in your collection" %}</h4>
     {% endif %}
 </div>
 
@@ -53,7 +53,7 @@
             {% endfor %}
         </section>
     {% else %}
-        <h4 style="margin: 20px 0 0 55px">You don't have any albums in your collection</h4>
+        <h4 style="margin: 20px 0 0 55px">{% trans "You don't have any albums in your collection" %}</h4>
     {% endif %}
 </div>
 

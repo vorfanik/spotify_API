@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Artist{% endblock %}
+{% block title %}{% trans "Artist" %}{% endblock %}
 
 {% block content %}
 
@@ -15,16 +15,16 @@
             {% endfor %}
         </select>
         <div class="button_info_div">
-            <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin: 0 10px;">Search</button>
+            <button type="submit" name="btn" value="add_form" class="button_info_a" style="padding:0; margin: 0 10px;">{% trans "Search" %}</button>
         </div>
 </form>
 <br>
 
 {% if artists %}
-<h3>Results for "{{genre}}"</h3>
+<h3>{% trans "Results for " %}"{{genre}}"</h3>
 <div class="tab">
-  <button class="tablinks active" onclick="openElement(event, 'Artists')" id="defaultOpen">Artists</button>
-  <button class="tablinks" onclick="openElement(event, 'Albums')">Albums</button>
+  <button class="tablinks active" onclick="openElement(event, 'Artists')" id="defaultOpen">{% trans "Artists" %}</button>
+  <button class="tablinks" onclick="openElement(event, 'Albums')">{% trans "Albums" %}</button>
 </div>
 
 <div id="Artists" class="tabcontent">

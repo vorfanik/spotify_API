@@ -12,4 +12,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('profile/', views.profile, name='profile'),
     path('profile_update/', views.profile_update, name='profile_update'),
+    path('api_project/', views.log_out, name='log_out'),
 ]

@@ -2,10 +2,9 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Welcome{% endblock %}
+{% block title %}{% trans "Spotify API" %}{% endblock %}
 
 {% block content %}
-<h3>Spotify API</h3>
 <section class="all_albums">
     {% for album in albums %}
     <a class="info2" href="{% url 'album' album.id%}">

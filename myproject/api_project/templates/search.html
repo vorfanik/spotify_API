@@ -2,14 +2,14 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Search results{% endblock %}
+{% block title %}{% trans "Search results" %}{% endblock %}
 
 {% block content %}
 
-<h3>Search results for "{{query}}"</h3>
+<h3>{% trans Search results for %} "{{query}}"</h3>
 <div class="tab">
-  <button class="tablinks active" onclick="openElement(event, 'Artists')" id="defaultOpen">Artists</button>
-  <button class="tablinks" onclick="openElement(event, 'Albums')">Albums</button>
+  <button class="tablinks active" onclick="openElement(event, 'Artists')" id="defaultOpen">{% trans "Artists" %}</button>
+  <button class="tablinks" onclick="openElement(event, 'Albums')">{% trans "Albums" %}</button>
 </div>
 
 <div id="Artists" class="tabcontent">
@@ -34,7 +34,7 @@
                         </a>
                     {% endfor %}
                 {% else %}
-                    <h4 style="margin: 20px 0 0 55px">Oops. We didn't find any artists</h4>
+                    <h4 style="margin: 20px 0 0 55px">{% trans "Oops. We didn't find any artists" %}</h4>
                 {% endif %}
             {% endfor %}
         </section>
@@ -55,7 +55,7 @@
                         </a>
                     {% endfor %}
                 {% else %}
-                    <h4 style="margin: 20px 0 0 55px">Oops. We didn't find any albums</h4>
+                    <h4 style="margin: 20px 0 0 55px">{% trans "Oops. We didn't find any albums" %}</h4>
                 {% endif %}
             {% endfor %}
         </section>
