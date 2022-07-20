@@ -1,0 +1,325 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-20 12:52+0300\n"
+"PO-Revision-Date: 2022-07-20 12:53+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < "
+"11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
+"1 : n % 1 != 0 ? 2: 3);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: .\models.py:9
+msgid "Photo"
+msgstr "Nuotrauka"
+
+#: .\models.py:27 .\templates\artist.html:5
+msgid "Artist"
+msgstr "Atlikėjas"
+
+#: .\models.py:28 .\templates\album.html:6
+msgid "Album"
+msgstr "Albumas"
+
+#: .\models.py:39
+msgid "Genres"
+msgstr "Žanrai"
+
+#: .\templates\album.html:17
+msgid "Record label "
+msgstr "Įrašų leidykla "
+
+#: .\templates\album.html:18
+msgid "Release Date "
+msgstr "Išleidimo data "
+
+#: .\templates\album.html:28
+msgid "Listen to full album"
+msgstr "Klausytis viso albumo"
+
+#: .\templates\album.html:37 .\templates\artist.html:28
+msgid "Add"
+msgstr "Pridėti"
+
+#: .\templates\album.html:44 .\templates\artist.html:35
+msgid "Delete"
+msgstr "Ištrinti"
+
+#: .\templates\artist.html:19
+msgid "More info"
+msgstr "Informacijos"
+
+#: .\templates\artist.html:20
+msgid "Fans also like"
+msgstr "Panaši muzika"
+
+#: .\templates\artist.html:50 .\templates\my_collection.html:12
+#: .\templates\recommendation.html:27 .\templates\search.html:12
+msgid "Albums"
+msgstr "Albumai"
+
+#: .\templates\base.html:27
+msgid "Home"
+msgstr "Titulinis"
+
+#: .\templates\base.html:29 .\templates\my_collection.html:6
+msgid "My Collection"
+msgstr "Mano kolekcija"
+
+#: .\templates\base.html:30
+msgid "Music Recommendation"
+msgstr "Muzikos rekomendacijos"
+
+#: .\templates\base.html:37
+msgid "Search by artist or album"
+msgstr "Paieška pagal atlikėją arba albumą"
+
+#: .\templates\base.html:51
+msgid "Log out"
+msgstr "Atsijungti"
+
+#: .\templates\base.html:55 .\templates\registration\login.html:3
+msgid "Login"
+msgstr "Prisijungti"
+
+#: .\templates\base.html:56
+msgid "Sign-up"
+msgstr "Registracija"
+
+#: .\templates\index.html:5
+msgid "Spotify API"
+msgstr "Spotify API"
+
+#: .\templates\my_collection.html:11 .\templates\recommendation.html:26
+#: .\templates\search.html:11
+msgid "Artists"
+msgstr "Atlikėjai"
+
+#: .\templates\my_collection.html:38
+msgid "You don't have any artists in your collection"
+msgstr "Jūsų kolekcijoje nėra atlikėjų"
+
+#: .\templates\my_collection.html:56
+msgid "You don't have any albums in your collection"
+msgstr "Jūsų kolekcijoje nėra albumų"
+
+#: .\templates\profile.html:3
+msgid "Profile"
+msgstr "Profilis"
+
+#: .\templates\profile.html:24 .\templates\profile_update.html:24
+msgid "Update"
+msgstr "Atnaujinti"
+
+#: .\templates\profile_update.html:3
+msgid "Profile Update"
+msgstr "Profilio atnaujinimas"
+
+#: .\templates\profile_update.html:18
+msgid "Profile update"
+msgstr "Profilio atnaujinimas"
+
+#: .\templates\recommendation.html:5
+msgid "Recommendation"
+msgstr "Rekomendacija"
+
+#: .\templates\recommendation.html:18
+msgid "Search"
+msgstr "Ieškoti"
+
+#: .\templates\recommendation.html:24
+msgid "Results for "
+msgstr "Paieškos rezultatai "
+
+#: .\templates\registration\login.html:8
+msgid "Login error, please try again!"
+msgstr "Prisijungimo klaida, bandykite dar kartą!"
+
+#: .\templates\registration\login.html:13
+msgid "You do not have access to this information. You must be logged in."
+msgstr ""
+"Jūs neturite prieigos prie šios informacijos. Jūs turite būti prisijungęs."
+
+#: .\templates\registration\login.html:20
+msgid "User: "
+msgstr "Vartotojas: "
+
+#: .\templates\registration\login.html:22
+msgid "Password: "
+msgstr "Slaptažodis: "
+
+#: .\templates\registration\login.html:26
+msgid "Log in"
+msgstr "Prisijungti"
+
+#: .\templates\registration\login.html:32
+msgid "Forgotten your password?"
+msgstr "Pamiršote savo slaptažodį?"
+
+#: .\templates\registration\password_reset_complete.html:3
+msgid "Reset password complete"
+msgstr "Slaptažodžio nustatymas iš naujo baigtas"
+
+#: .\templates\registration\password_reset_complete.html:7
+msgid "Password changed!"
+msgstr "Slaptažodis pakeistas!"
+
+#: .\templates\registration\password_reset_complete.html:10
+msgid "Log In"
+msgstr "Prisijungti"
+
+#: .\templates\registration\password_reset_confirm.html:3
+#: .\templates\registration\password_reset_done.html:3
+#: .\templates\registration\password_reset_form.html:3
+#: .\templates\registration\password_reset_form.html:17
+msgid "Reset password"
+msgstr "Atstatyti slaptažodį"
+
+#: .\templates\registration\password_reset_confirm.html:7
+msgid "Enter a new password."
+msgstr "Įveskite nauja slaptažodį."
+
+#: .\templates\registration\password_reset_confirm.html:12
+msgid "New password:"
+msgstr "Naujas slaptažodis:"
+
+#: .\templates\registration\password_reset_confirm.html:15
+#: .\templates\registration\register.html:46
+msgid "Repeat the password"
+msgstr "Pakartokite slaptažodį"
+
+#: .\templates\registration\password_reset_confirm.html:19
+msgid "Change the password"
+msgstr "Pakeiskite slaptažodį"
+
+#: .\templates\registration\password_reset_confirm.html:23
+msgid "Failed to change password"
+msgstr "Nepavyko pakeisti slaptažodžio"
+
+#: .\templates\registration\password_reset_confirm.html:24
+msgid "Password reset link is invalid. Please initiate a password reset."
+msgstr ""
+"Slaptažodžio nustatymo iš naujo nuoroda neteisinga. Pradėkite slaptažodžio "
+"nustatymą iš naujo."
+
+#: .\templates\registration\password_reset_done.html:6
+msgid "We've emailed you a link to change your password!"
+msgstr "El. paštu išsiuntėme nuorodą, kad pakeistumėte slaptažodį!"
+
+#: .\templates\registration\password_reset_email.html:2
+msgid ""
+"Someone sent us a password reset request. If this was you, follow the link "
+"below:"
+msgstr ""
+"Kažkas atsiuntė mums slaptažodžio nustatymo iš naujo užklausą. Jei tai "
+"buvote jūs, spustelėkite toliau pateiktą nuorodą:"
+
+#: .\templates\registration\password_reset_form.html:7
+msgid "Enter your email address"
+msgstr "Įveskite savo elektroninio pašto adresą"
+
+#: .\templates\registration\register.html:3
+#: .\templates\registration\register.html:15
+msgid "Registration"
+msgstr "Registracija"
+
+#: .\templates\registration\register.html:19
+msgid "User name"
+msgstr "Vartotojo vardas"
+
+#: .\templates\registration\register.html:24
+msgid "First name"
+msgstr "Vardas"
+
+#: .\templates\registration\register.html:29
+msgid "Last name"
+msgstr "Pavardė"
+
+#: .\templates\registration\register.html:34
+msgid "Email"
+msgstr "El. paštas"
+
+#: .\templates\registration\register.html:36
+msgid ""
+"We will not share with anyone, we will not send any spam. Required to send a "
+"new password."
+msgstr ""
+"Su niekuo nesidalinsime, jokio šlamšto nesiųsime. Būtina išsiųsti naują "
+"slaptažodį."
+
+#: .\templates\registration\register.html:40
+msgid "Password"
+msgstr "Slaptažodis"
+
+#: .\templates\registration\register.html:42 .\views.py:187
+msgid ""
+"Please enter password should be One Capital Letter, One lowercase letter, "
+"One Number, Length Should be 4-12"
+msgstr ""
+"Įveskite slaptažodį: viena didžioji raidė, viena mažoji raidė, vienas "
+"skaičius, ilgis turėtų būti 4–12"
+
+#: .\templates\registration\register.html:51
+msgid "Sign up"
+msgstr "Registruotis"
+
+#: .\templates\registration\register.html:57
+msgid "If you have registered before, "
+msgstr "Jei užsiregistravote anksčiau, "
+
+#: .\templates\registration\register.html:57
+msgid "Sign in"
+msgstr "Prisijungti"
+
+#: .\templates\related.html:5
+msgid "Related Artists"
+msgstr "Susiję atlikėjai"
+
+#: .\templates\related.html:8
+msgid "Fans also like..."
+msgstr "Gerbėjams taip pat patinka..."
+
+#: .\templates\search.html:5
+msgid "Search results"
+msgstr "Paieškos rezultatai"
+
+#: .\templates\search.html:9
+msgid "Search results for "
+msgstr "Paieškos rezultatai "
+
+#: .\templates\search.html:37
+msgid "Oops. We didn't find any artists"
+msgstr "Oi. Neradome jokių atlikėjų"
+
+#: .\templates\search.html:58
+msgid "Oops. We didn't find any albums"
+msgstr "Oi. Neradome jokių albumų"
+
+#: .\views.py:175
+#, python-format
+msgid "User name %s already exists!"
+msgstr "Vartotojo vardas %s jau yra!"
+
+#: .\views.py:180
+#, python-format
+msgid "User with email Email %s is already registered!"
+msgstr "Vartotojas su el. pašto adresu %s jau užsiregistravęs!"
+
+#: .\views.py:191
+msgid "Passwords do not match!"
+msgstr "Slaptažodžiai nesutampa!"
+
+#: .\views.py:209
+msgid "Profile updated"
+msgstr "Profilis atnaujintas"

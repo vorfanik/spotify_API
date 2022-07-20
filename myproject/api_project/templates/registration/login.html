@@ -14,21 +14,21 @@
     {% endif %}
   {% endif %}
 
-  <form method="post" action="{% url 'login' %}">
+  <form style="margin-left:20px;" method="post" action="{% url 'login' %}">
     {% csrf_token %}
 
-    <p>{% trans "User: " %}</p>
+    <p style="margin:0 0 10px 0;">{% trans "User: " %}</p>
     <p>{{ form.username }}</p>
     <p>{% trans "Password: " %}</p>
     <p>{{ form.password }}</p>
     <br>
-    <div class="form-group">
-      <button type="submit" class="btn btn-outline-warning"> {% trans "Log in" %} </button>
+    <div class="button_info_div">
+      <button type="submit" class="button_info_a" style="padding:0; margin:0;"> {% trans "Log in" %} </button>
       <input type="hidden" name="next" value="{{ next }}" />
     </div>
   </form>
   <br>
-  <div class="btn-group btn-group-sm">
-    <a href="{% url 'password_reset' %}" class="btn btn-secondary">{% trans "Forgotten your password?" %}</a>
+  <div class="button_info_div">
+    <a href="{% url 'password_reset' %}" class="button_info_a delete" style="width: 200px; padding-top: 5px; margin-left: 20px;">{% trans "Forgotten your password?" %}</a>
   </div>
 {% endblock %}

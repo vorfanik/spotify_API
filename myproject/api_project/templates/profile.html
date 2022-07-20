@@ -20,8 +20,9 @@
             <p class="text-secondary">{{ user.email }}</p>
         </div>
     </div>
-    <div class="btn-group btn-group">
-    <a href="{% url 'profile_update' %}" class="btn btn-outline-warning">{% trans "Update" %}</a>
+   <div class="button_info_div">
+        <a class="button_info_a" href="{% url 'profile_update' %}">{% trans "Update" %}</a>
     </div>
+
 </div>
 {% endblock content %}

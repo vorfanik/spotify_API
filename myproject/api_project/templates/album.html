@@ -14,8 +14,8 @@
              <a class="info2" href="{% url 'artist' album.artists.0.id%}">
                 <h5 style="padding: 0">{{ album.artists.0.name }}</h5>
              </a>
-            <p style="margin-bottom: 8px;">{% trans Label %}<i>{{ album.label }}</i></p>
-            <p style="margin-bottom: 20px;">{% trans Release Date %}<i>{{ album.release_date }}</i></p>
+            <p style="margin-bottom: 8px;">{% trans "Record label " %}<i>{{ album.label }}</i></p>
+            <p style="margin-bottom: 20px;">{% trans "Release Date " %}<i>{{ album.release_date }}</i></p>
         </div>
 
         {% if user.is_authenticated %}
@@ -25,7 +25,7 @@
                     <form action="" method="post" id="listen_album">
                         {% csrf_token %}
                         <div class="button_info_div">
-                             <button type="submit" name="btn" value="listen_album" class="button_info_a" style="padding:0; margin-right: 10px; width: 150px;">{% trans "Listen to full album" %}</button>
+                             <button type="submit" name="btn" value="listen_album" class="button_info_a" style="padding:0; margin-right: 20px; width: 150px;">{% trans "Listen to full album" %}</button>
                         </div>
                     </form>
                 {% endif%}
@@ -67,7 +67,7 @@
                         <button id="track_link" type="submit" name="btn" value="track">
                             <input type="hidden" name="track_link" value="{{track.id}}">
                             <div class="track_name_duration">
-                                <p style="width: 600px;">{{ track.name }}</p>
+                                <p style="width: 600px; white-space: nowrap; overflow: hidden; margin-top: auto;">{{ track.name }}</p>
                                 <p>{{ track.duration_ms|flr:60000 }}:</p>
                                 {% if track.duration_ms|mod:60000|div:600|mul:0.6|add_decimal:0 < 10 %}
                                 <p>0</p>

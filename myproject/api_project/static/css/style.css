@@ -15,6 +15,7 @@ body {
     width: 1200px;
     height:auto;
     margin:auto;
+    margin-top:30px;
 }
 
 h3 {
@@ -150,7 +151,7 @@ h6{
     height: 40px;
     padding-top:10px;
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
     margin-top:13px;
     border-radius: 8px;
     transition: transform 0.3s;
@@ -160,8 +161,8 @@ h6{
 .button_info_a:hover {
     transform: scale(1.1);
     cursor: pointer;
-    color: black;
-    box-shadow: 1px 1px 4px 3px grey;
+    color: #1ed760;
+    box-shadow: 1px 1px 4px 3px #1ed760;
 }
 
 #button_add_del {
@@ -177,7 +178,7 @@ h6{
 }
 
 .delete:hover {
-   box-shadow: 0px 0px 4px 3px red;
+   box-shadow: 0px 0px 4px 3px #1ed760;
 }
 
 #recommendation{
@@ -203,8 +204,9 @@ h6{
 
 /* Style the buttons inside the tab */
 .tab button {
-    width: 48%;
+    width: 47%;
     margin-right: 10px;
+    margin-bottom: 20px;
     border: none;
     cursor: pointer;
     padding: 14px 16px;
@@ -215,7 +217,7 @@ h6{
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #ddd;
+    background-color: #1ed760;
 }
 
 /* Create an active/current tablink class */
