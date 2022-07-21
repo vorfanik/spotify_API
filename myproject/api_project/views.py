@@ -4,7 +4,6 @@ from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext as _
 from .spotify_authorization import authorize
 from .models import Collection, Recommendation
 from .forms import ProfileUpdateForm, UserUpdateForm
