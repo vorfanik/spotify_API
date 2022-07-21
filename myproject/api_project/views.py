@@ -125,10 +125,8 @@ def collection(request):
 def recommendation(request):
     genres_all = Recommendation.objects.all()
     genre = ''
-    artists = []
-    artists_id = []
-    album_id = []
-    albums = []
+    artists, artists_id = [], []
+    albums, album_id = [], []
     if request.method == "POST":
         genre = request.POST['genre']
         tracks = api.recommendations(genres=[genre], limit=12)
